@@ -9,8 +9,8 @@
   "name":"p_ghost",
   "overriddenProperties":[],
   "parent":{
-    "name":"Characters",
-    "path":"folders/Objects/Characters.yy",
+    "name":"Ghosts",
+    "path":"folders/Objects/Ghosts.yy",
   },
   "parentObjectId":null,
   "persistent":false,

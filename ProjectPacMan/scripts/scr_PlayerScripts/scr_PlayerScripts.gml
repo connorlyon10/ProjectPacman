@@ -1,65 +1,73 @@
 function PlayerMovement()
 {
-	keyLeft = keyboard_check(vk_left) || keyboard_check(ord("A"))
-	keyRight = keyboard_check(vk_right) || keyboard_check(ord("D"))
-	keyUp = keyboard_check(vk_up) || keyboard_check(ord("W"))
-	keyDown = keyboard_check(vk_down) || keyboard_check(ord("S"))
+    // Input tracking for direction
+    var keyLeft = keyboard_check(vk_left) || keyboard_check(ord("A"));
+    var keyRight = keyboard_check(vk_right) || keyboard_check(ord("D"));
+    var keyUp = keyboard_check(vk_up) || keyboard_check(ord("W"));
+    var keyDown = keyboard_check(vk_down) || keyboard_check(ord("S"));
 
-	inputDirection = point_direction(0,0,keyRight-keyLeft,keyDown-keyUp);
-	inputMagnitude = (keyRight-keyLeft != 0) || (keyDown - keyUp != 0);
-	
-	xSpeed = lengthdir_x(inputMagnitude * moveSpeed, inputDirection);
-	ySpeed = lengthdir_y(inputMagnitude * moveSpeed, inputDirection);
+    // Ensure only one direction is active
+	if (keyRight) inputDir = 0; // Right
+	else if (keyUp) inputDir = 90; // Up
+	else if (keyLeft) inputDir = 180; // Left
+    else if (keyDown) inputDir = 270; // Down
+    
 
-	PlayerCollision();
+    // Calculate movement
+    if ( (inputDir != noone) && (CanMove(inputDir)) )
+    {
+        var moveX = lengthdir_x(moveSpeed, inputDir);
+        var moveY = lengthdir_y(moveSpeed, inputDir);
+    }
+    else
+    {
+        moveX = 0;
+        moveY = 0;
+    }
+  
+    // Move player
+    x += moveX;
+    y += moveY;
 }
 
-function PlayerCollision()
+
+
+
+
+
+function CanMove(direction)
 {
-	///@desc Allows for collisions against walls. Looks at the destination, checks for an instance, and sets speed to zero if there is one. 'Walls' are in collisionMap which is a tile layer called 'Col'
-	var _collision = false;
-	
-	
-	//-----Horizontal Tiles-----
-	if (tilemap_get_at_pixel(collisionMap, x + xSpeed, y))
-	{
-		x -= x mod TILE_SIZE;
-		if (sign(xSpeed) == 1)
-		{
-			x += TILE_SIZE - 1;
-		}
-		xSpeed = 0;
-		_collision = true;
-	}
-		
-	
-	//-----Vertical Tiles-----
-	if (tilemap_get_at_pixel(collisionMap, x, y+ySpeed))
-	{
-		y -= y mod TILE_SIZE;
-		if (sign(ySpeed) == 1)
-		{
-			y += TILE_SIZE - 1;
-		}
-		ySpeed = 0;
-		_collision = true;
-	}
-	
-	
-	//Commit to movement
-	x += xSpeed
-	y += ySpeed
-	return _collision
+    // Calculate the target position based on the direction
+    var targetX = x + lengthdir_x(moveSpeed, direction);
+    var targetY = y + lengthdir_y(moveSpeed, direction);
+
+    // Get the bounding box corners of the sprite
+    var bboxLeft = bbox_left + (targetX - x);
+    var bboxRight = bbox_right + (targetX - x);
+    var bboxTop = bbox_top + (targetY - y);
+    var bboxBottom = bbox_bottom + (targetY - y);
+
+    // Tile collision check for all four corners of the bounding box
+    return !(
+        tilemap_get_at_pixel(collisionMap, bboxLeft, bboxTop) ||
+        tilemap_get_at_pixel(collisionMap, bboxRight, bboxTop) ||
+        tilemap_get_at_pixel(collisionMap, bboxLeft, bboxBottom) ||
+        tilemap_get_at_pixel(collisionMap, bboxRight, bboxBottom)
+    );
 }
+
 
 function PlayerAnimation()
 {
-	if (xSpeed == 0) && (ySpeed == 0)
-	{
-		image_speed = 0
-		image_index = 0
-	}
-	else image_speed = 1
-	
-	image_angle = inputDirection
+    if (moveSpeed == 0)
+    {
+        image_speed = 0;
+        image_index = 0;
+    }
+    else
+    {
+        image_speed = 1;
+        if (inputDir != noone) {image_angle = inputDir}
+    }
 }
+

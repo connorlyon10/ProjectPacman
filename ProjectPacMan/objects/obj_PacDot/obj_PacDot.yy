@@ -1,16 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"obj_pacman",
+  "%Name":"obj_PacDot",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"obj_pacman","path":"objects/obj_pacman/obj_pacman.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_pacman",
+  "name":"obj_PacDot",
   "overriddenProperties":[],
   "parent":{
-    "name":"PacMan",
-    "path":"folders/Objects/PacMan.yy",
+    "name":"Objects",
+    "path":"folders/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -31,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_pacman",
-    "path":"sprites/spr_pacman/spr_pacman.yy",
+    "name":"spr_PacDot",
+    "path":"sprites/spr_PacDot/spr_PacDot.yy",
   },
   "spriteMaskId":null,
   "visible":true,

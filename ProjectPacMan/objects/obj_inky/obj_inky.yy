@@ -6,8 +6,8 @@
   "name":"obj_inky",
   "overriddenProperties":[],
   "parent":{
-    "name":"Characters",
-    "path":"folders/Objects/Characters.yy",
+    "name":"Ghosts",
+    "path":"folders/Objects/Ghosts.yy",
   },
   "parentObjectId":{
     "name":"p_ghost",
