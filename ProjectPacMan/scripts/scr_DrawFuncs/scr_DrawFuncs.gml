@@ -42,3 +42,16 @@ function Draw_Text_At(_xx,_yy,_str, align = "left")
 	draw_set_colour(c_white);
 	draw_text(_xx,_yy,_str);
 }
+
+function Draw_Text_Colour(_xx,_yy,_str, align = "left", colour = c_white)
+{
+	if (align == "centre") || (align == "middle") Draw_Set_Centre()
+	else if (align == "right") Draw_Set_Right()
+	else Draw_Set()
+	
+	_str = string(_str);	//has to be a string
+	
+	//draw text
+	draw_set_colour(colour);
+	draw_text(_xx,_yy,_str);
+}

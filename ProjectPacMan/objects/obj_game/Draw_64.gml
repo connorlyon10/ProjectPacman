@@ -1,4 +1,10 @@
-/// @description Draw Score, lives and fruit
+/// @description Draw Score, lives and fruit.
+
+//Draw 'ready' text if game is starting
+if alarm[0] > 0
+{
+	Draw_Text_Colour(RESOLUTION_W/2,RESOLUTION_H/2+15,"Ready!","middle",c_yellow)
+}
 
 
 //Score

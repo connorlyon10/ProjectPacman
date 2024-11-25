@@ -4,4 +4,5 @@ global.lives = 3;
 global.fruit = [];
 
 //Start game
+global.countdown = true;
 room_goto(ROOM_START)
